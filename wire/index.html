@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apent Holding — Invista bem, viva melhor.</title>
+<meta name="description" content="A holding que integra tecnologia, dados, assessoria e gestão para transformar como você investe.">
+<link rel="icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../favicon-180x180.png">
+<link rel="icon" sizes="192x192" href="../favicon-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#01429C;--nyhavn:#39C6FE;--amarelo:#F2C538;
+  --salmo:#FFB490;--laranja:#FFA336;--cinza:#F3F3F3;
+  --preto:#182028;--branco:#FFFFFF;
+  --font:'Hanken Grotesk',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--preto);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--nyhavn);width:0%;z-index:1001;transition:width .1s linear}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:2px;left:0;right:0;z-index:1000;
+  padding:0 52px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .3s ease,backdrop-filter .3s ease;
+}
+nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
+.nav-logo{flex-shrink:0; display: flex; align-items: center;}
+.nav-logo img{height: 24px; width: auto; display: block;}
+.nav-center{display:flex;gap:32px;align-items:center}
+.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.6);transition:color .2s;letter-spacing:.02em;white-space:nowrap}
+.nav-link:hover{color:#fff}
+.nav-cta{
+  background:var(--azul);color:#fff;
+  font-size:13px;font-weight:500;letter-spacing:.03em;
+  padding:10px 22px;border-radius:3px;
+  transition:background .2s;white-space:nowrap;
+}
+.nav-cta:hover{background:#0251bb}
+
+/* ── HERO ── */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #182028; /* Placeholder for video */
+}
+
+/* VÍDEO placeholder */
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100vh;
+  min-width: 177.78vh;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay Vignette */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(24,32,40,.75), rgba(24,32,40,.6) 35%, rgba(24,32,40,.8) 70%, rgba(24,32,40,.92));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  max-width: 820px;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nyhavn);
+  opacity: 0;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+}
+
+.hero-h1 {
+  font-size: clamp(42px, 5.5vw, 82px);
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+}
+.hero-h1 em { font-style: normal; color: var(--nyhavn); font-weight: 300; }
+
+.hero-sub {
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 300;
+  color: #f3f3f3;
+  max-width: 560px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.7s;
+  margin-bottom: 8px;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--azul);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 17px 44px;
+  border-radius: 3px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 14px 0 rgba(0,0,0,0.2);
+}
+.btn-primary.hero-btn {
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
+}
+.btn-primary:hover {
+  background: #0251bb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 68, 162, 0.4);
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--azul);
+}
+.btn-white:hover {
+  background: #f3f3f3;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 1.6s;
+}
+.scroll-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+.scroll-line {
+  width: 1px;
+  height: 36px;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+}
+.scroll-line::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -100%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(57,198,254,0.5), transparent);
+  animation: scrollAnim 2s ease-in-out infinite 2s;
+}
+
+.accent-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  z-index: 10;
+  background: linear-gradient(90deg, #0044A2 0%, #00C8FF 25%, #FBC200 50%, #FBC200 75%, #FF9E00 100%);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scrollAnim {
+  0%   { top: -100%; }
+  100% { top: 200%; }
+}
+
+/* ── ORIGEM ── */
+#origem{background:#fff}
+#origem-inner{position:relative;z-index:2;padding:128px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1200px;margin:0 auto}
+.sec-eyebrow{font-size:10px;font-weight:500;letter-spacing:.28em;color:var(--azul);margin-bottom:22px;display:block}
+.sec-title{font-size:clamp(30px,3.6vw,46px);font-weight:300;line-height:1.12;letter-spacing:-.03em;color:var(--preto);margin-bottom:20px}
+.sec-body{font-size:17px;font-weight:300;line-height:1.75;color:rgba(25,32,40,.65)}
+.timeline{display:flex;flex-direction:column}
+.tl-item{
+  display:grid;grid-template-columns:44px 1fr;align-items:start;
+  padding:26px 0;border-bottom:1px solid rgba(25,32,40,.07);
+  opacity:0;transform:translateX(14px);
+  transition:opacity .5s ease,transform .5s ease;
+}
+.tl-item:last-child{border-bottom:none}
+.tl-item.visible{opacity:1;transform:none}
+.tl-left{display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:3px}
+.tl-year-num{font-size:10px;font-weight:500;color:var(--preto);letter-spacing:.05em}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--preto);flex-shrink:0}
+.tl-item.visible .tl-dot{background:var(--azul)}
+.tl-item.now .tl-dot{width:10px;height:10px;background:var(--laranja)}
+.tl-title{font-size:16px;font-weight:500;color:var(--preto);margin-bottom:5px;line-height:1.25}
+.tl-desc{font-size:14px;font-weight:300;color:var(--preto);line-height:1.6}
+
+/* ── FAIXA NÓRDICA ── */
+.nordic-stripe{height:3px;background:linear-gradient(90deg,var(--nyhavn) 0%,var(--amarelo) 33%,var(--salmo) 66%,var(--laranja) 100%)}
+
+/* ── ECOSSISTEMA ── */
+#ecossistema{background:var(--preto);padding:120px 0 0}
+.eco-header{text-align:center;padding:0 56px;margin-bottom:72px}
+.eco-header .sec-eyebrow{color:var(--nyhavn)}
+.eco-header .sec-title{color:#fff}
+.eco-header .sec-body{color:rgba(255,255,255,.45);max-width:500px;margin:12px auto 0}
+
+/* Blocos verticais */
+.eco-blocks {
+  display: flex;
+  flex-direction: column;
+}
+.eco-block {
+  position: relative;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 56px;
+  overflow: hidden;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.eco-block.tech {
+  background-color: #09182B; /* Fallback */
+  background-image: url('../img/Criar_uma_imagem_para_ser_202605031750.jpeg');
+}
+.eco-block.asses {
+  background-color: #1A0E06; /* Fallback */
+  background-image: url('../img/apent_invest.jpeg');
+}
+
+/* Overlays para escurecer o fundo parallax */
+.eco-block-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.eco-block.tech .eco-block-overlay { background: rgba(0,68,162,0.88); }
+.eco-block.asses .eco-block-overlay { background: rgba(255,158,0,0.88); }
+
+.eco-block-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.eco-block-info { max-width: 500px; }
+.eco-block-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3em; margin-bottom: 20px;
+}
+.eco-block-tag.tech { color: var(--nyhavn); }
+.eco-block-tag.tech .eco-tag-dot { background: var(--nyhavn); }
+.eco-block-tag.asses { color: var(--laranja); }
+.eco-block-tag.asses .eco-tag-dot { background: var(--laranja); }
+.eco-tag-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+.eco-block-title { font-size: clamp(32px, 4vw, 52px); font-weight: 300; line-height: 1.1; color: #fff; margin-bottom: 20px; letter-spacing: -0.03em; }
+.eco-block-desc { font-size: 16px; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.55); margin-bottom: 40px; }
+.eco-block-link { display: inline-flex; font-size: 14px; font-weight: 500; color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s, transform 0.3s; }
+.eco-block-link:hover { color: rgba(255,255,255,0.7); transform: translateX(4px); }
+
+
+/* Carrossel Base */
+.carousel-viewport {
+  width: auto; margin: -30px; padding: 30px; overflow: hidden; position: relative;
+  -ms-overflow-style: none; scrollbar-width: none;
+  /* Fade suave nas laterais para não cortar os cards bruscamente */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 82%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 82%, transparent 100%);
+}
+.carousel-viewport::-webkit-scrollbar { display: none; }
+.carousel-track {
+  display: flex;
+  align-items: stretch; /* Garante que todos os cards tenham a mesma altura */
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: transform;
+}
+.carousel-card-wrap {
+  flex: 0 0 calc(100% - 100px); min-width: 0; margin-right: 16px;
+  display: flex; /* Para que o eco-glass-card preencha toda a altura */
+}
+.carousel-nav {
+  display: flex; align-items: center; gap: 24px; margin-top: 24px;
+}
+.carousel-dots { display: flex; gap: 8px; }
+.carousel-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2);
+  cursor: pointer; transition: background 0.3s;
+}
+.carousel-dot.active { background: #fff; }
+.carousel-arrows { display: flex; gap: 12px; }
+.carousel-arrow {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+  background: transparent; color: #fff; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.3s;
+}
+.carousel-arrow:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+.carousel-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Carrossel Espelhado (RTL) */
+.carousel-viewport.mirrored {
+  direction: rtl;
+  /* Espelhar a máscara para o RTL */
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 12%, black 82%, transparent 100%);
+  mask-image: linear-gradient(to left, transparent 0%, black 12%, black 82%, transparent 100%);
+}
+.carousel-viewport.mirrored .carousel-card-wrap {
+  direction: ltr;
+  margin-right: 0;
+  margin-left: 16px;
+}
+.carousel-viewport.mirrored .carousel-nav {
+  direction: ltr;
+  justify-content: flex-end;
+}
+
+/* Glassmorphism Premium Cards */
+.eco-glass-card {
+  background: #0044A2; /* Cor sólida da identidade Apent */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top-color: rgba(255, 255, 255, 0.22);
+  border-left-color: rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 48px;
+  min-height: 260px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.eco-glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.eco-glass-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.4);
+}
+.eco-glass-card:hover::before {
+  opacity: 1;
+}
+
+/* Títulos dos cards: sempre #00C8FF em qualquer bloco */
+.eco-card-brand { font-size: 22px; font-weight: 500; margin-bottom: 12px; color: #00C8FF; }
+.eco-card-brand.tech { color: #00C8FF; }
+.eco-card-brand.asses { color: #00C8FF; }
+
+.eco-card-desc { font-size: 14px; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.85); margin-bottom: 20px; }
+.eco-card-stats { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.65); }
+.eco-card-stats strong { font-weight: 600; color: #fff; }
+
+/* Apent Investimentos Styles */
+.eco-block.asses .eco-block-info { order: 2; }
+.eco-block.asses .carousel-viewport { order: 1; }
+
+.eco-block.asses .eco-block-title,
+.eco-block.asses .eco-block-desc,
+.eco-block.asses .eco-block-tag {
+  color: #182028 !important;
+}
+.eco-block.asses .eco-tag-dot { background: #182028; }
+
+.eco-block.asses .eco-glass-card { background: #FF9E00; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+.eco-block.asses .eco-glass-card:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-8px) scale(1.02); box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.4); }
+/* Textos dos cards Investimentos: escuro sobre fundo laranja */
+.eco-block.asses .eco-card-brand { color: #182028 !important; }
+.eco-block.asses .eco-card-desc { color: #182028 !important; }
+.eco-block.asses .eco-card-stats { color: rgba(24,32,40,0.7) !important; }
+.eco-block.asses .eco-card-stats strong { color: #182028 !important; }
+/* Cores Navegação Apent Investimentos */
+.eco-block.asses .carousel-dot { background: rgba(24,32,40,0.2); }
+.eco-block.asses .carousel-dot.active { background: #182028; }
+.eco-block.asses .carousel-arrow { border-color: rgba(24,32,40,0.25); color: #182028; }
+.eco-block.asses .carousel-arrow:hover { background: rgba(24,32,40,0.1); border-color: rgba(24,32,40,0.5); }
+
+/* ── NÚMEROS ── */
+#numeros{background:var(--azul);padding:52px 56px}
+.num-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.num-divider{width:1px;height:40px;background:rgba(255,255,255,.15);flex-shrink:0;margin:0 4px}
+.num-item{text-align:center;padding:0 28px;opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}
+.num-item.visible{opacity:1;transform:none}
+.num-val{font-size:clamp(26px,3vw,38px);font-weight:300;letter-spacing:-.03em;color:var(--amarelo);display:block;line-height:1;margin-bottom:5px}
+.num-label{font-size:13px;font-weight:400;color:#ffffff;letter-spacing:.04em;white-space:nowrap}
+
+/* ── SÓCIOS ── */
+#socios { background: #182028; padding: 120px 56px; }
+.socios-header { text-align: center; margin-bottom: 80px; }
+.socios-header .sec-eyebrow { color: #FFB188; }
+.socios-header .sec-title { color: #fff; }
+.socios-header p { color: rgba(255,255,255,0.5); }
+
+.socios-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px; /* Dense grid */
+  background: rgba(255,255,255,0.04); /* separators */
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.socio-card {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: #182028;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Vinheta: fade largo nas bordas para misturar com o fundo real das fotos */
+.socio-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    /* Fade horizontal nas laterais (mais intenso) */
+    linear-gradient(to right,  #19212C 0%, transparent 22%, transparent 78%, #19212C 100%),
+    /* Fade vertical topo e base */
+    linear-gradient(to bottom, #19212C 0%, transparent 18%, transparent 72%, #19212C 100%);
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.socio-card:hover::after {
+  opacity: 0.35;
+}
+
+/* Mock initials when no image */
+.socio-mock-initials {
+  font-size: 48px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.1);
+  letter-spacing: -0.03em;
+  z-index: 1;
+}
+
+.socio-img {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center top;
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+.socio-card:hover .socio-img {
+  transform: scale(1.02);
+}
+
+.socio-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  opacity: 1;
+}
+
+.socio-card:hover img {
+  transform: scale(1.02);
+  opacity: 0.55;
+}
+
+.socio-info {
+  position: absolute;
+  inset: 0;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(24,32,40,0.97) 0%, rgba(24,32,40,0.65) 45%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 3; /* Acima da vinheta */
+}
+
+.socio-card:hover .socio-info {
+  opacity: 1;
+}
+
+.socio-name {
+  font-size: 20px; font-weight: 400; color: #fff; margin-bottom: 4px;
+  transform: translateY(15px);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s;
+}
+.socio-cargo {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: var(--nyhavn); text-transform: uppercase; margin-bottom: 12px;
+  transform: translateY(15px);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s;
+}
+.socio-bio {
+  font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.5;
+  transform: translateY(15px);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s;
+}
+
+.socio-card:hover .socio-name,
+.socio-card:hover .socio-cargo {
+  transform: translateY(0);
+}
+.socio-card:hover .socio-bio {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Placeholder cards */
+.socio-card.placeholder .socio-info { display: none; }
+.socio-card.placeholder { cursor: default; }
+.socio-card.placeholder:hover img { transform: none; opacity: 0.8; }
+
+/* ── CTA + FOOTER ── */
+#cta-footer{background:var(--preto);position:relative;overflow:hidden}
+.cta-accent{height:3px;background:linear-gradient(90deg,var(--nyhavn),var(--amarelo),var(--salmo),var(--laranja))}
+.cta-deco{position:absolute;right:-80px;top:-120px;width:440px;height:440px;border-radius:50%;border:1px solid rgba(57,198,254,.05);pointer-events:none}
+.cta-deco::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(242,197,56,.04)}
+.cta-deco-half{position:absolute;left:-60px;bottom:-80px;width:280px;height:140px;border-radius:140px 140px 0 0;border:1px solid rgba(255,163,54,.06);pointer-events:none}
+
+.cta-main{
+  padding:100px 56px 64px;max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;
+  position:relative;z-index:2;
+}
+.cta-left .sec-eyebrow{color:var(--nyhavn)}
+.cta-title{font-size:clamp(34px,4.5vw,58px);font-weight:300;line-height:1.05;letter-spacing:-.04em;color:#fff;margin-bottom:16px}
+.cta-title em{font-style:normal;color:var(--nyhavn);font-weight:300}
+.cta-sub{font-size:17px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);margin-bottom:44px;max-width:460px}
+.cta-right{display:flex;flex-direction:column;gap:0}
+.cta-proof-item{padding:22px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;gap:14px}
+.cta-proof-item:last-child{border-bottom:none}
+.cta-proof-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:7px}
+.cta-proof-text{font-size:14px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.55}
+.cta-proof-text strong{font-weight:500;color:rgba(255,255,255,.75)}
+
+.footer-bar{border-top:1px solid rgba(255,255,255,.06);padding:20px 56px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:2}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.2);font-weight:300}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:11px;color:rgba(255,255,255,.2);transition:color .2s;font-weight:300}
+.footer-links a:hover{color:rgba(255,255,255,.5)}
+
+/* Grafismos SVG Bauhaus */
+.svg-onda-tl {
+  position: absolute; top: -30px; left: -50px; width: 300px; opacity: 1; pointer-events: none; z-index: 0;
+  animation: floatEquilibrio 8s ease-in-out infinite alternate;
+}
+.svg-onda-br {
+  position: absolute; bottom: -20px; right: -80px; width: 450px; opacity: 1; pointer-events: none; z-index: 0;
+  animation: floatEquilibrio 9s ease-in-out infinite alternate-reverse;
+}
+
+.svg-sol {
+  position: absolute; right: 0; bottom: 10%; width: 240px; pointer-events: none; z-index: 1;
+  opacity: 0; transform: scale(0.9);
+  transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.svg-sol.visible { opacity: 0.15; transform: scale(1); }
+
+.svg-equilibrio {
+  position: absolute; right: 5%; top: 20%; width: 220px; opacity: 0.10;
+  animation: floatEquilibrio 6s ease-in-out infinite; pointer-events: none; z-index: 0;
+}
+@keyframes floatEquilibrio {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.svg-constancia-tr {
+  position: absolute; top: 0; right: -120px; width: 380px; opacity: 1; pointer-events: none; z-index: 0;
+  transform: rotate(90deg);
+}
+.svg-constancia-bl {
+  position: absolute; bottom: 0; left: -50px; width: 180px; opacity: 1; pointer-events: none; z-index: 0;
+  transform: rotate(90deg);
+}
+
+.svg-cta-sol {
+  position: absolute; bottom: -200px; left: 50%; transform: translateX(-50%); width: 400px; opacity: 0.25; pointer-events: none; z-index: 0;
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .svg-sol { display: none; }
+  .svg-equilibrio { opacity: 0.05; right: -50px; width: 140px; }
+  /* SVGs Bauhaus na seção origem: z-index abaixo do conteúdo */
+  .svg-onda-tl { z-index: 0 !important; opacity: 0.5; }
+  .svg-onda-br { z-index: 0 !important; opacity: 0.5; }
+  .svg-constancia-tr { width: 200px; z-index: 0; }
+  .svg-constancia-bl { width: 90px; z-index: 0; }
+  .svg-cta-sol { width: 250px; bottom: -120px; left: 50%; transform: translateX(-50%); right: auto; top: auto; }
+  #origem-inner{grid-template-columns:1fr;padding:80px 28px;gap:48px; position:relative; z-index:1;}
+  .eco-block-content { grid-template-columns: 1fr; gap: 40px; }
+  .eco-block.asses .eco-block-info { order: 1; }
+  .eco-block.asses .carousel-viewport { order: 2; }
+  .eco-block { padding: 80px 28px; min-height: auto; }
+  #numeros{padding:40px 28px}
+  .num-divider{display:none}
+  .num-item{padding:12px 16px}
+  .socios-grid{grid-template-columns:repeat(3,1fr)}
+  .cta-main{grid-template-columns:1fr;gap:40px;padding:72px 28px 48px}
+  nav{padding:0 24px}
+  .footer-bar{flex-direction:column;padding:20px 28px;text-align:center;gap:10px}
+  .eco-header{padding:0 28px}
+  /* Navegação do carrossel sempre à esquerda no mobile */
+  .carousel-nav { justify-content: flex-start !important; }
+  .carousel-viewport.mirrored .carousel-nav { justify-content: flex-start !important; }
+  /* Carrossel Investimentos no mobile: mesmo comportamento LTR do Tech */
+  .carousel-viewport.mirrored {
+    direction: ltr;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 82%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 12%, black 82%, transparent 100%);
+  }
+  .carousel-viewport.mirrored .carousel-card-wrap {
+    margin-left: 0;
+    margin-right: 16px;
+  }
+}
+@media(max-width:600px){
+  .socios-grid{grid-template-columns:repeat(3,1fr);gap:2px;}
+  .socio-card { aspect-ratio: 4/5; }
+  .socio-info { padding: 12px; }
+  .socio-bio { display: none; }
+  .nav-center{display:none}
+  .num-inner{flex-direction:column;gap:0}
+  .num-item{padding:14px 0;width:100%;border-bottom:1px solid rgba(255,255,255,.08)}
+  .num-item:last-child{border-bottom:none}
+  .hero-h1 { font-size: 38px; }
+  .eco-glass-card { padding: 24px; min-height: 220px; }
+  .tl-item{grid-template-columns:40px 1fr;overflow:hidden;}
+  .tl-item > div{min-width:0;overflow:hidden;}
+  /* SVG onda topo: menor mas cores 100% */
+  .svg-onda-tl { width: 140px !important; top: -10px !important; left: -20px !important; opacity: 1 !important; }
+  /* SVG onda base: voltar, z-index 0 para ficar atras do texto */
+  .svg-onda-br { display: block !important; z-index: 0 !important; opacity: 1 !important; }
+}
+
+/* Modal Sócios */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(24,32,40,0.85); backdrop-filter: blur(8px);
+  z-index: 2000; display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 24px;
+}
+.modal-backdrop.active { opacity: 1; pointer-events: auto; }
+.modal-card {
+  background: #182028; width: 100%; max-width: 420px; border-radius: 12px;
+  overflow: hidden; position: relative; transform: translateY(20px); transition: transform 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+.modal-backdrop.active .modal-card { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 16px; right: 16px; width: 32px; height: 32px;
+  background: rgba(0,0,0,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: #fff; cursor: pointer; z-index: 10; font-size: 20px; line-height: 1; border: none;
+}
+.modal-img {
+  width: 100%; height: 280px; background: #182028;
+  object-fit: cover;
+  object-position: center 15%; /* Prioriza mostrar a cabeça completa */
+  display: block;
+}
+.modal-img-placeholder { font-size: 64px; font-weight: 300; color: rgba(255,255,255,0.1); }
+.modal-content { padding: 32px; }
+.modal-name { font-size: 24px; font-weight: 300; color: #fff; margin-bottom: 4px; }
+.modal-cargo { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: var(--nyhavn); text-transform: uppercase; margin-bottom: 20px; display: inline-block; }
+.modal-bio { font-size: 15px; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.7); }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo"><img src="../Logos_PNG/APENT_Logo-Branco_sem-fundo.png" alt="Apent Holding"></a>
+  <div class="nav-center">
+    <a href="#origem" class="nav-link">Nossa história</a>
+    <a href="#ecossistema" class="nav-link">O ecossistema</a>
+  </div>
+  <a href="#cta-footer" class="nav-cta">Fale conosco</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas class="hero-video" id="hero-canvas" style="opacity: 0; transition: opacity 1.5s ease; z-index: 0;"></canvas>
+  <video class="hero-video" id="hero-video" autoplay muted playsinline preload="auto" style="transition: opacity 1.5s ease; z-index: 0;">
+    <source src="../hero/hero_bg_optimized.mp4?v=2" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">APENT HOLDING</div>
+    <h1 class="hero-h1">Invista bem,<br><em>viva melhor.</em></h1>
+    <p class="hero-sub">O ecossistema financeiro que conecta tecnologia, dados e assessoria para transformar como você investe.</p>
+    <a href="#ecossistema" class="btn-primary hero-btn">Conheça o ecossistema</a>
+  </div>
+
+  <div class="scroll-hint">
+    <span class="scroll-label">SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+
+  <div class="accent-bar"></div>
+</section>
+
+<!-- ORIGEM -->
+<section id="origem" style="position:relative; overflow:hidden;">
+  <svg class="svg-onda-tl" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 0,50 A 50,50 0 0,0 100,50 Z" fill="#0044A2"/>
+    <path d="M 100,50 A 50,50 0 0,1 200,50 Z" fill="#00C8FF"/>
+  </svg>
+  <svg class="svg-onda-br" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 0,50 A 50,50 0 0,0 100,50 Z" fill="#0044A2"/>
+    <path d="M 100,50 A 50,50 0 0,1 200,50 Z" fill="#00C8FF"/>
+    <path d="M 200,50 A 50,50 0 0,0 300,50 Z" fill="#0044A2"/>
+  </svg>
+  <div id="origem-inner">
+    <div class="reveal">
+      <span class="sec-eyebrow">A NOVA FASE</span>
+      <h2 class="sec-title">Do maior canal de FIIs do Brasil ao ecossistema completo.</h2>
+      <p class="sec-body">O Clube FII construiu a maior plataforma de cobertura de Fundos Imobiliários do país. A Apent é o próximo passo — uma holding que integra tecnologia, dados, distribuição e assessoria em uma estrutura única, preparada para capturar valor em toda a cadeia do investidor.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-year-num">2017</span><div class="tl-dot"></div></div>
+        <div><div class="tl-title">Clube FII nasce</div><div class="tl-desc">A principal plataforma de cobertura de Fundos Imobiliários do Brasil — construída sobre dados, análise e comunidade.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-year-num">2025</span><div class="tl-dot"></div></div>
+        <div><div class="tl-title">Virada estratégica</div><div class="tl-desc">+41% de crescimento YoY. EBITDA acima de 50%. Início da vertical transacional e da solução White Label B2B2C.</div></div>
+      </div>
+      <div class="tl-item now">
+        <div class="tl-left"><span class="tl-year-num" style="color:var(--laranja)">2026</span><div class="tl-dot"></div></div>
+        <div><div class="tl-title" style="color:var(--azul)">Nasce a Apent Holding</div><div class="tl-desc">A holding que integra tecnologia, assessoria e gestão. R$&nbsp;3,2B sob custódia. 46 mil clientes. Uma nova fase começa.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="nordic-stripe"></div>
+
+<!-- ECOSSISTEMA -->
+<section id="ecossistema">
+  <div class="eco-header reveal">
+    <span class="sec-eyebrow">A APENT</span>
+    <h2 class="sec-title" style="color:#fff">Um ecossistema construído para crescer.</h2>
+    <p class="sec-body">Cada frente conectada. Cada especialista no lugar certo. Da tecnologia à alocação — tudo integrado.</p>
+  </div>
+
+  <div class="eco-blocks">
+    
+    <!-- Bloco 1: Apent Tech -->
+    <div class="eco-block tech" style="position:relative; overflow:hidden;">
+      <div class="eco-block-overlay"></div>
+      <!-- SVG Sol -->
+      <svg class="svg-sol reveal-svg" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 200,50 A 150,150 0 0,0 200,350 Z" fill="#FBC200"/>
+        <g stroke="#00C8FF" stroke-width="6">
+          <line x1="0" y1="80" x2="200" y2="80"/>
+          <line x1="0" y1="105" x2="200" y2="105"/>
+          <line x1="0" y1="130" x2="200" y2="130"/>
+          <line x1="0" y1="155" x2="200" y2="155"/>
+          <line x1="0" y1="180" x2="200" y2="180"/>
+          <line x1="0" y1="205" x2="200" y2="205"/>
+          <line x1="0" y1="230" x2="200" y2="230"/>
+          <line x1="0" y1="255" x2="200" y2="255"/>
+          <line x1="0" y1="280" x2="200" y2="280"/>
+          <line x1="0" y1="305" x2="200" y2="305"/>
+        </g>
+      </svg>
+      <div class="eco-block-content">
+        
+        <div class="eco-block-info reveal">
+          <div class="eco-block-tag tech"><div class="eco-tag-dot"></div>APENT TECH</div>
+          <h3 class="eco-block-title">Infraestrutura proprietária em escala.</h3>
+          <p class="eco-block-desc">Plataforma tecnológica que conecta conteúdo, comunidade e a distribuição de produtos financeiros, operando tanto para o público final quanto em soluções white-label B2B2C.</p>
+          <a href="http://apenttech.com.br/" target="_blank" rel="noopener" class="btn-primary btn-white">Conheça</a>
+        </div>
+        
+        <div class="carousel-viewport reveal" style="transition-delay: 0.2s" id="tech-carousel">
+          <div class="carousel-track">
+            <div class="carousel-card-wrap">
+              <div class="eco-glass-card">
+                <h4 class="eco-card-brand tech">Clube FII</h4>
+                <p class="eco-card-desc">O maior portal de fundos imobiliários do Brasil opera como cliente white label da Apent Tech. Dados em tempo real, carteiras e inteligência de mercado suportados pela nossa infraestrutura.</p>
+                <div class="eco-card-stats"><strong>+75 mil</strong> carteiras &nbsp;·&nbsp; <strong>+R$&nbsp;8B</strong> AUC virtual</div>
+              </div>
+            </div>
+            <div class="carousel-card-wrap">
+              <div class="eco-glass-card">
+                <h4 class="eco-card-brand tech" style="color:rgba(57,198,254,.75)">White Label B2B2C</h4>
+                <p class="eco-card-desc">Camada tecnológica para criação, distribuição e monetização de produtos financeiros. Uma infraestrutura robusta, white label e disponível para parceiros institucionais do mercado.</p>
+                <div class="eco-card-stats"><strong>Infraestrutura completa</strong> para o mercado</div>
+              </div>
+            </div>
+            <div class="carousel-card-wrap">
+              <div class="eco-glass-card">
+                <h4 class="eco-card-brand tech" style="color:rgba(255,255,255,.4)">Seu Negócio Aqui</h4>
+                <p class="eco-card-desc">A mesma infraestrutura que impulsiona o Clube FII está pronta para acelerar a sua plataforma de investimentos. Tecnologia proprietária construída para escalar.</p>
+                <div class="eco-card-stats"><strong>Soluções B2B2C</strong> escaláveis</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-nav">
+            <div class="carousel-dots">
+              <div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div>
+            </div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow prev" disabled>&#8592;</button>
+              <button class="carousel-arrow next">&#8594;</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Bloco 2: Apent Investimentos -->
+    <div class="eco-block asses">
+      <div class="eco-block-overlay"></div>
+      <div class="eco-block-content">
+        
+        <div class="eco-block-info reveal">
+          <div class="eco-block-tag asses"><div class="eco-tag-dot"></div>APENT INVESTIMENTOS</div>
+          <h3 class="eco-block-title">O melhor do mercado, acessível para você.</h3>
+          <p class="eco-block-desc">Curadoria isenta e independente, garantindo que nossos clientes tenham acesso aos melhores ativos do mercado, com foco em resultados reais e preservação de patrimônio.</p>
+          <a href="https://apentinvest.com.br/" target="_blank" rel="noopener" class="btn-primary">Conheça</a>
+        </div>
+        
+        <div class="carousel-viewport reveal mirrored" style="transition-delay: 0.2s" id="asses-carousel">
+          <div class="carousel-track">
+            <div class="carousel-card-wrap">
+              <div class="eco-glass-card">
+                <h4 class="eco-card-brand asses">Autem Investimentos</h4>
+                <p class="eco-card-desc">Assessoria que democratiza o acesso a ativos de alta qualidade. Relatórios exclusivos e atendimento contínuo — para investidores que exigem mais do que as prateleiras genéricas.</p>
+                <div class="eco-card-stats"><strong>R$&nbsp;3,2B</strong> sob custódia &nbsp;·&nbsp; <strong>46 mil+</strong> clientes</div>
+              </div>
+            </div>
+            <div class="carousel-card-wrap">
+              <div class="eco-glass-card">
+                <h4 class="eco-card-brand asses" style="color:rgba(255,163,54,.75)">Consultoria & Gestão</h4>
+                <p class="eco-card-desc">Alocação inteligente e serviços especializados para alta renda e clientes institucionais. Estratégias exclusivas e uma gestão de portfólio verdadeiramente alinhada com o cliente.</p>
+                <div class="eco-card-stats"><strong>Gestão patrimonial</strong> sob medida</div>
+              </div>
+            </div>
+            <div class="carousel-card-wrap">
+              <div class="eco-glass-card">
+                <h4 class="eco-card-brand asses" style="color:rgba(255,255,255,.4)">Wealth Management</h4>
+                <p class="eco-card-desc">Proteção de patrimônio, sucessão e estruturas offshore para garantir que o legado da sua família perpasse gerações com eficiência tributária e jurídica.</p>
+                <div class="eco-card-stats"><strong>Soluções exclusivas</strong> globais</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-nav">
+            <div class="carousel-dots">
+              <div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div>
+            </div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow prev" disabled>&#8592;</button>
+              <button class="carousel-arrow next">&#8594;</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<div class="nordic-stripe"></div>
+
+<!-- NÚMEROS -->
+<section id="numeros" style="position:relative; overflow:hidden;">
+  <!-- SVG Equilíbrio -->
+  <svg class="svg-equilibrio" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 20,150 A 80,80 0 0,0 180,150 Z" fill="#0044A2"/>
+    <circle cx="100" cy="110" r="40" fill="#0044A2"/>
+  </svg>
+  <div class="num-inner">
+    <div class="num-item"><span class="num-val" data-target="3.2" data-prefix="+R$&nbsp;" data-suffix="B">+R$&nbsp;3,2B</span><span class="num-label">Sob custódia · Autem</span></div>
+    <div class="num-divider"></div>
+    <div class="num-item"><span class="num-val" data-target="46" data-suffix=" mil+">46 mil+</span><span class="num-label">Clientes ativos</span></div>
+    <div class="num-divider"></div>
+    <div class="num-item"><span class="num-val" data-target="8" data-prefix="+R$&nbsp;" data-suffix="B">+R$&nbsp;8B</span><span class="num-label">AUC virtual · Clube FII</span></div>
+    <div class="num-divider"></div>
+    <div class="num-item"><span class="num-val" data-target="41" data-suffix="%">41%</span><span class="num-label">Crescimento YoY 2025</span></div>
+    <div class="num-divider"></div>
+    <div class="num-item"><span class="num-val" data-target="10" data-prefix="R$&nbsp;" data-suffix="B">R$&nbsp;10B</span><span class="num-label">Meta de patrimônio</span></div>
+  </div>
+</section>
+
+<!-- SÓCIOS -->
+<section id="socios" style="position:relative; overflow:hidden;">
+  <!-- SVG Constância Cantos -->
+  <svg class="svg-constancia-tr" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#FFB188">
+      <path d="M 50,20 A 80,80 0 0,1 50,180 Z"/>
+      <path d="M 150,20 A 80,80 0 0,1 150,180 Z"/>
+      <circle cx="310" cy="100" r="80"/>
+    </g>
+  </svg>
+  <svg class="svg-constancia-bl" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#FFB188">
+      <path d="M 50,20 A 80,80 0 0,1 50,180 Z"/>
+      <path d="M 150,20 A 80,80 0 0,1 150,180 Z"/>
+      <circle cx="310" cy="100" r="80"/>
+    </g>
+  </svg>
+  <div class="socios-header reveal">
+    <span class="sec-eyebrow">O TIME</span>
+    <h2 class="sec-title">Quem está por trás da Apent.</h2>
+    <p style="max-width:400px;margin:12px auto 0;font-size:16px;font-weight:300;line-height:1.6">Experiência que constrói convicção.</p>
+  </div>
+  <div class="socios-grid reveal" style="transition-delay:0.2s">
+    <!-- 1. Felipe Guinle -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/FelipeGuinle.jpeg" alt="Felipe Guinle" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Felipe Guinle</h4>
+        <span class="socio-cargo">Sócio &amp; CEO</span>
+        <p class="socio-bio">Felipe lidera a Apent com visão estratégica de longo prazo, buscando constantemente inovação em todos os setores do ecossistema.</p>
+      </div>
+    </div>
+    <!-- 2. Rodrigo Cardoso -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/RodrigoCardoso.jpeg" alt="Rodrigo Cardoso" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Rodrigo Cardoso</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Experiência consolidada em mercado financeiro e gestão de portfólios, com foco em crescimento sustentável dentro do ecossistema Apent.</p>
+      </div>
+    </div>
+    <!-- 3. Celson -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/Celson.jpeg" alt="Celson" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Celson</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Referência em estruturação de negócios e desenvolvimento de parcerias estratégicas que impulsionam o crescimento da Apent.</p>
+      </div>
+    </div>
+    <!-- 4. Vinicius Almeida -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/ViniciusAlmeida.jpeg" alt="Vinícius Almeida" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Vinícius Almeida</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Liderança focada em expansão e eficiência, agregando visão de negócios para o crescimento do ecossistema.</p>
+      </div>
+    </div>
+    <!-- 5. Danilo Barbosa -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/DaniloBarbosa.jpeg" alt="Danilo Barbosa" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Danilo Barbosa</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Experiência sólida na estruturação de novos negócios e otimização de operações dentro da Apent Tech.</p>
+      </div>
+    </div>
+    <!-- 6. Felipe Ribeiro -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/FelipeRibeiro.jpeg" alt="Felipe Ribeiro" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Felipe Ribeiro</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Atuação estratégica na expansão das verticais de negócio da Apent, com foco em distribuição e captação.</p>
+      </div>
+    </div>
+    <!-- 7. Thiago Otuki -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/ThiagoOtuki.jpeg" alt="Thiago Otuki" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Thiago Otuki</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Visão analítica e foco em resultados, contribuindo para a eficiência operacional e crescimento do portfólio da Apent.</p>
+      </div>
+    </div>
+    <!-- 8 & 9: Placeholders para fotos a enviar -->
+    <div class="socio-card placeholder"><div class="socio-mock-initials">·</div><div class="socio-info"></div></div>
+    <div class="socio-card placeholder"><div class="socio-mock-initials">·</div><div class="socio-info"></div></div>
+  </div>
+</section>
+
+<!-- CTA + FOOTER -->
+<section id="cta-footer">
+  <div class="cta-accent"></div>
+  <div class="cta-deco"></div>
+  <div class="cta-deco-half"></div>
+  <!-- SVG Sol CTA -->
+  <svg class="svg-cta-sol" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <mask id="cta-sol-mask">
+        <circle cx="200" cy="200" r="180" fill="white"/>
+        <g stroke="black" stroke-width="12">
+          <line x1="20" y1="110" x2="380" y2="110"/>
+          <line x1="20" y1="130" x2="380" y2="130"/>
+          <line x1="20" y1="150" x2="380" y2="150"/>
+          <line x1="20" y1="170" x2="380" y2="170"/>
+          <line x1="20" y1="190" x2="380" y2="190"/>
+        </g>
+      </mask>
+    </defs>
+    <rect width="400" height="400" fill="#FBC200" mask="url(#cta-sol-mask)"/>
+  </svg>
+  <div class="cta-main">
+    <div class="cta-left reveal">
+      <span class="sec-eyebrow">FALE CONOSCO</span>
+      <h2 class="cta-title">Invista para<br><em>viver melhor.</em><br>Saiba como.</h2>
+      <p class="cta-sub">Conectamos você à inteligência certa para cada etapa da sua jornada. Dados, plataforma e assessoria — tudo em um ecossistema.</p>
+      <a href="mailto:contato@apent.com.br" class="btn-primary">Fale conosco</a>
+    </div>
+    <div class="cta-right reveal" style="transition-delay:.2s">
+      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--nyhavn)"></div><div class="cta-proof-text">Acesse dados reais de <strong>+75 mil carteiras</strong> de FIIs integradas à B3 via Clube FII.</div></div>
+      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--laranja)"></div><div class="cta-proof-text">Invista com assessores que já cuidam de <strong>R$&nbsp;3,2 bilhões</strong> para 46 mil clientes na Autem.</div></div>
+      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--amarelo)"></div><div class="cta-proof-text">Faça parte de um grupo com a meta de chegar a <strong>R$&nbsp;10 bilhões</strong> sob gestão.</div></div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span class="footer-copy">© 2026 Apent Holding®. Todos os direitos reservados.</span>
+    <div class="footer-links"><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+  </div>
+</section>
+
+<!-- MODAL SÓCIOS -->
+<div class="modal-backdrop" id="socio-modal" onclick="if(event.target===this) closeSocioModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeSocioModal()">×</button>
+    <div class="modal-img" id="modal-img-container">
+      <div class="modal-img-placeholder" id="modal-initials"></div>
+    </div>
+    <div class="modal-content">
+      <h4 class="modal-name" id="modal-name"></h4>
+      <span class="modal-cargo" id="modal-cargo"></span>
+      <p class="modal-bio" id="modal-bio"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* PROGRESS */
+window.addEventListener('scroll',()=>{
+  const el=document.documentElement;
+  document.getElementById('progress').style.width=(el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
+});
+
+/* NAV */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>80);
+});
+
+/* IO GERAL */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-svg,.num-item,.socio-card:not(.placeholder)').forEach((el,i)=>{
+  if(!el.style.transitionDelay) el.style.transitionDelay=(i*.06)+'s';
+  io.observe(el);
+});
+
+/* TIMELINE */
+const tlIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.3});
+document.querySelectorAll('.tl-item').forEach((el,i)=>{el.style.transitionDelay=(i*.15)+'s';tlIO.observe(el)});
+
+/* SÓCIOS MODAL */
+function openSocioModal(card) {
+  if (card.classList.contains('placeholder')) return;
+  const name = card.querySelector('.socio-name').innerText;
+  const cargo = card.querySelector('.socio-cargo').innerText;
+  const bio = card.querySelector('.socio-bio').innerText;
+  
+  const initialsEl = card.querySelector('.socio-mock-initials');
+  const imgEl = card.querySelector('.socio-img');
+  
+  if (imgEl) {
+    document.getElementById('modal-img-container').innerHTML = `<img src="${imgEl.src}" alt="${name}" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;">`;
+  } else if (initialsEl) {
+    document.getElementById('modal-img-container').innerHTML = `<div class="modal-img-placeholder" id="modal-initials">${initialsEl.innerText}</div>`;
+  }
+  
+  document.getElementById('modal-name').innerText = name;
+  document.getElementById('modal-cargo').innerText = cargo;
+  document.getElementById('modal-bio').innerText = bio;
+  
+  document.getElementById('socio-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeSocioModal() {
+  document.getElementById('socio-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+/* CARROSSEL DRAG & NAV */
+function initCarousel(carouselId) {
+  const container = document.getElementById(carouselId);
+  if (!container) return;
+  const track = container.querySelector('.carousel-track');
+  const cards = container.querySelectorAll('.carousel-card-wrap');
+  const dots = container.querySelectorAll('.carousel-dot');
+  const btnPrev = container.querySelector('.carousel-arrow.prev');
+  const btnNext = container.querySelector('.carousel-arrow.next');
+  
+  const isMirrored = container.classList.contains('mirrored');
+  const dirMultiplier = isMirrored ? 1 : -1;
+  
+  let currentIndex = 0;
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let isDragging = false;
+
+  function update() {
+    const cardWidth = cards[0].offsetWidth + 16; // width + gap
+    const maxIndex = cards.length - 1;
+    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+    
+    currentTranslate = currentIndex * cardWidth * dirMultiplier;
+    prevTranslate = currentTranslate;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+    
+    dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+    btnPrev.disabled = currentIndex === 0;
+    btnNext.disabled = currentIndex === maxIndex;
+  }
+
+  btnPrev.addEventListener('click', () => { currentIndex--; update(); });
+  btnNext.addEventListener('click', () => { currentIndex++; update(); });
+  dots.forEach((d, i) => d.addEventListener('click', () => { currentIndex = i; update(); }));
+
+  // Touch/Drag
+  track.addEventListener('touchstart', touchStart, {passive: true});
+  track.addEventListener('touchend', touchEnd);
+  track.addEventListener('touchmove', touchMove, {passive: true});
+  track.addEventListener('mousedown', touchStart);
+  track.addEventListener('mouseup', touchEnd);
+  track.addEventListener('mouseleave', () => { if(isDragging) touchEnd() });
+  track.addEventListener('mousemove', touchMove);
+
+  function touchStart(e) {
+    isDragging = true;
+    startX = getPositionX(e);
+    track.style.transition = 'none';
+  }
+  function touchMove(e) {
+    if (!isDragging) return;
+    const currentPosition = getPositionX(e);
+    currentTranslate = prevTranslate + currentPosition - startX;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }
+  function touchEnd() {
+    isDragging = false;
+    track.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    const movedBy = currentTranslate - prevTranslate;
+    
+    if (isMirrored) {
+      if (movedBy > 50 && currentIndex < cards.length - 1) currentIndex++;
+      else if (movedBy < -50 && currentIndex > 0) currentIndex--;
+    } else {
+      if (movedBy < -50 && currentIndex < cards.length - 1) currentIndex++;
+      else if (movedBy > 50 && currentIndex > 0) currentIndex--;
+    }
+    update();
+  }
+  function getPositionX(e) {
+    return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+  }
+  
+  window.addEventListener('resize', update);
+  setTimeout(update, 100);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initCarousel('tech-carousel');
+  initCarousel('asses-carousel');
+});
+
+/* COUNTER */
+function countTo(el,target,prefix,suffix,dur){
+  const start=performance.now();
+  const isFloat=String(target).includes('.');
+  const num=parseFloat(target);
+  function tick(now){
+    const p=Math.min((now-start)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    const val=isFloat?(num*ease).toFixed(1):Math.round(num*ease);
+    el.innerHTML=(prefix||'')+val+(suffix||'');
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const numIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('.num-item').forEach((item,i)=>{
+        item.classList.add('visible');
+        const v=item.querySelector('.num-val');
+        if(v&&v.dataset.target) setTimeout(()=>countTo(v,v.dataset.target,v.dataset.prefix,v.dataset.suffix,1300),i*100);
+      });
+      numIO.disconnect();
+    }
+  });
+},{threshold:.4});
+numIO.observe(document.getElementById('numeros'));
+
+/* HERO VIDEO FREEZE ON END */
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.getElementById('hero-video');
+  const canvas = document.getElementById('hero-canvas');
+  if(video && canvas) {
+    video.addEventListener('timeupdate', function onTimeUpdate() {
+      if (video.currentTime >= 5.0) {
+        video.removeEventListener('timeupdate', onTimeUpdate);
+        video.pause();
+        const ctx = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.style.opacity = '1';
+        video.style.opacity = '0';
+      }
+    });
+  }
+});
+
+/* EQUALIZE HEIGHTS (Removido) */
+</script>
+</body>
+</html>
