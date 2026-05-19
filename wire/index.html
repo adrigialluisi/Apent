@@ -448,7 +448,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 .num-label{font-size:13px;font-weight:400;color:#ffffff;letter-spacing:.04em;white-space:nowrap}
 
 /* ── SÓCIOS ── */
-#socios { background: #2b2b2b; padding: 120px 56px; }
+#socios { background: #202020; padding: 120px 56px; }
 .socios-header { text-align: center; margin-bottom: 80px; }
 .socios-header .sec-eyebrow { color: #FFB188; }
 .socios-header .sec-title { color: #fff; }
@@ -465,7 +465,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 .socio-card {
   position: relative;
   aspect-ratio: 4/5;
-  background: #2b2b2b;
+  background: #202020;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -480,9 +480,9 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
   inset: 0;
   background:
     /* Fade horizontal nas laterais */
-    linear-gradient(to right,  #2b2b2b 0%, transparent 20%, transparent 80%, #2b2b2b 100%),
+    linear-gradient(to right,  #202020 0%, transparent 20%, transparent 80%, #202020 100%),
     /* Fade vertical base */
-    linear-gradient(to bottom, transparent 70%, #2b2b2b 100%);
+    linear-gradient(to bottom, transparent 70%, #202020 100%);
   z-index: 2;
   pointer-events: none;
   transition: opacity 0.5s ease;
@@ -531,11 +531,13 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 .socio-info {
   position: absolute;
   inset: 0;
-  padding: 32px;
+  /* Padding lateral alinhado com a borda da imagem (12.5% do card) */
+  padding: 0 12.5% 28px 12.5%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background: linear-gradient(to top, rgba(43,43,43,0.98) 0%, rgba(43,43,43,0.70) 45%, transparent 100%);
+  /* Gradiente mais alto — sobreposição suave com a parte inferior da foto */
+  background: linear-gradient(to top, rgba(32,32,32,0.99) 0%, rgba(32,32,32,0.85) 28%, rgba(32,32,32,0.40) 55%, transparent 100%);
   opacity: 0;
   transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   z-index: 3; /* Acima da vinheta */
@@ -770,7 +772,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
   aspect-ratio: 3/4 !important;
   position: relative !important;
   overflow: hidden !important;
-  background: #2b2b2b !important;
+  background: #202020 !important;
 }
 /* Imagem 75% de largura, sem gap no topo */
 .socio-card img, .socio-card .socio-img {
