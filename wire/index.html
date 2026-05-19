@@ -220,7 +220,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 
 /* ── ORIGEM ── */
 #origem{background:#fff}
-#origem-inner{position:relative;z-index:2;padding:128px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1200px;margin:0 auto}
+#origem-inner{position:relative;z-index:2;padding:72px 80px 32px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;max-width:1200px;margin:0 auto}
 .sec-eyebrow{font-size:10px;font-weight:500;letter-spacing:.28em;color:var(--azul);margin-bottom:22px;display:block}
 .sec-title{font-size:clamp(30px,3.6vw,46px);font-weight:300;line-height:1.12;letter-spacing:-.03em;color:var(--preto);margin-bottom:20px}
 .sec-body{font-size:17px;font-weight:300;line-height:1.75;color:rgba(25,32,40,.65)}
@@ -735,6 +735,58 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 .modal-name { font-size: 24px; font-weight: 300; color: #fff; margin-bottom: 4px; }
 .modal-cargo { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: var(--nyhavn); text-transform: uppercase; margin-bottom: 20px; display: inline-block; }
 .modal-bio { font-size: 15px; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.7); }
+/* HORIZONTAL TIMELINE */
+.tl-h-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
+.tl-h-scroll-wrap::-webkit-scrollbar { display: none; }
+.tl-h-track { display: flex; align-items: flex-start; gap: 0; min-width: max-content; }
+.tl-h-item { display: flex; flex-direction: column; align-items: flex-start; flex: 0 0 220px; position: relative; }
+.tl-h-item:first-child .tl-h-line-l { background: transparent; }
+.tl-h-item:last-child .tl-h-line-r { background: transparent; }
+.tl-h-line-l, .tl-h-line-r { height: 2px; background: rgba(25,32,40,0.12); position: absolute; top: 11px; width: 50%; }
+.tl-h-line-l { left: 0; }
+.tl-h-line-r { right: 0; }
+.tl-h-dot-wrap { position: relative; z-index: 2; margin-bottom: 14px; padding-left: 0; }
+.tl-h-dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--azul); background: #fff; transition: background 0.3s, transform 0.3s; cursor: pointer; }
+.tl-h-item.is-now .tl-h-dot { background: var(--laranja); border-color: var(--laranja); box-shadow: 0 0 0 6px rgba(251,194,0,0.15); }
+.tl-h-item:not(.is-now):hover .tl-h-dot { background: var(--azul); transform: scale(1.15); }
+.tl-h-year { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--azul); margin-bottom: 6px; }
+.tl-h-item.is-now .tl-h-year { color: var(--laranja); }
+.tl-h-text { padding-right: 24px; }
+.tl-h-title { font-size: 14px; font-weight: 600; color: var(--preto); line-height: 1.3; margin-bottom: 6px; }
+.tl-h-desc { font-size: 12px; font-weight: 300; color: rgba(25,32,40,0.6); line-height: 1.55; }
+
+/* NOVO GRID ECOSSISTEMA */
+.eco-logos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto 80px auto; padding: 0 56px; }
+.eco-logo-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 40px 20px; display: flex; align-items: center; justify-content: center; transition: background 0.3s, border-color 0.3s; }
+.eco-logo-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); }
+.eco-logo-card img { max-width: 140px; max-height: 50px; object-fit: contain; opacity: 0.8; transition: opacity 0.3s; }
+.eco-logo-card:hover img { opacity: 1; }
+@media(max-width:768px) { .eco-logos-grid { grid-template-columns: 1fr; margin-bottom: 60px; } }
+
+/* OVERRIDE NÚMEROS */
+.num-val { font-size: clamp(36px, 4.5vw, 52px) !important; margin-bottom: 8px !important; }
+.num-label { font-size: 14px !important; color: rgba(255,255,255,0.7) !important; white-space: normal !important; max-width: 180px; margin: 0 auto; display: block; }
+
+/* OVERRIDE SÓCIOS PB E TRONCO */
+.socio-card { aspect-ratio: 3/4 !important; position: relative !important; overflow: hidden !important; }
+.socio-card img, .socio-card .socio-img {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1 !important;
+  z-index: 1 !important;
+  object-fit: cover !important;
+  object-position: center 15% !important;
+  transform: none !important;
+  filter: grayscale(100%) !important;
+  transition: filter 0.5s ease, transform 0.5s ease !important;
+}
+.socio-card:hover img, .socio-card:hover .socio-img {
+  filter: grayscale(0%) !important;
+  transform: scale(1.03) !important;
+}
 </style>
 </head>
 <body>
@@ -745,8 +797,10 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 <nav id="nav">
   <a href="#" class="nav-logo"><img src="../Logos_PNG/APENT_Logo-Branco_sem-fundo.png" alt="Apent Holding"></a>
   <div class="nav-center">
-    <a href="#origem" class="nav-link">Nossa história</a>
-    <a href="#ecossistema" class="nav-link">O ecossistema</a>
+    <a href="#origem" class="nav-link">Quem Somos</a>
+    <a href="#ecossistema" class="nav-link">Ecossistema</a>
+    <a href="#socios" class="nav-link">Time</a>
+    <a href="#numeros" class="nav-link">Números</a>
   </div>
   <a href="#cta-footer" class="nav-cta">Fale conosco</a>
 </nav>
@@ -771,7 +825,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
     <div class="scroll-line"></div>
   </div>
 
-  <div class="accent-bar"></div>
+
 </section>
 
 <!-- ORIGEM -->
@@ -786,29 +840,86 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
     <path d="M 200,50 A 50,50 0 0,0 300,50 Z" fill="#0044A2"/>
   </svg>
   <div id="origem-inner">
+    <!-- Coluna esquerda: título -->
     <div class="reveal">
       <span class="sec-eyebrow">A NOVA FASE</span>
       <h2 class="sec-title">Do maior canal de FIIs do Brasil ao ecossistema completo.</h2>
-      <p class="sec-body">O Clube FII construiu a maior plataforma de cobertura de Fundos Imobiliários do país. A Apent é o próximo passo — uma holding que integra tecnologia, dados, distribuição e assessoria em uma estrutura única, preparada para capturar valor em toda a cadeia do investidor.</p>
     </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-left"><span class="tl-year-num">2017</span><div class="tl-dot"></div></div>
-        <div><div class="tl-title">Clube FII nasce</div><div class="tl-desc">A principal plataforma de cobertura de Fundos Imobiliários do Brasil — construída sobre dados, análise e comunidade.</div></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><span class="tl-year-num">2025</span><div class="tl-dot"></div></div>
-        <div><div class="tl-title">Virada estratégica</div><div class="tl-desc">+41% de crescimento YoY. EBITDA acima de 50%. Início da vertical transacional e da solução White Label B2B2C.</div></div>
-      </div>
-      <div class="tl-item now">
-        <div class="tl-left"><span class="tl-year-num" style="color:var(--laranja)">2026</span><div class="tl-dot"></div></div>
-        <div><div class="tl-title" style="color:var(--azul)">Nasce a Apent Holding</div><div class="tl-desc">A holding que integra tecnologia, assessoria e gestão. R$&nbsp;3,2B sob custódia. 46 mil clientes. Uma nova fase começa.</div></div>
+    <!-- Coluna direita: texto de apoio -->
+    <div class="reveal" style="padding-top:18px">
+      <p class="sec-body" style="margin-top:0">O Clube FII construiu a maior plataforma de cobertura de Fundos Imobiliários do país. A Apent é o próximo passo — uma holding que integra tecnologia, dados, distribuição e assessoria em uma estrutura única, preparada para capturar valor em toda a cadeia do investidor.</p>
+    </div>
+  </div>
+  <!-- Timeline horizontal — alinhada com título -->
+  <div style="max-width:1200px; margin:0 auto; padding-bottom:72px;">
+    <div class="tl-h-scroll-wrap reveal">
+      <div class="tl-h-track" style="padding: 40px 80px 24px;">
+        <div class="tl-h-item">
+          <div class="tl-h-line-l" style="background:transparent"></div>
+          <div class="tl-h-line-r"></div>
+          <div class="tl-h-dot-wrap"><div class="tl-h-dot"></div></div>
+          <div class="tl-h-year">2017</div>
+          <div class="tl-h-text">
+            <div class="tl-h-title">Clube FII nasce</div>
+            <div class="tl-h-desc">A principal plataforma de FIIs do Brasil.</div>
+          </div>
+        </div>
+        <div class="tl-h-item">
+          <div class="tl-h-line-l"></div>
+          <div class="tl-h-line-r"></div>
+          <div class="tl-h-dot-wrap"><div class="tl-h-dot"></div></div>
+          <div class="tl-h-year">2019</div>
+          <div class="tl-h-text">
+            <div class="tl-h-title">Expansão e Novos Produtos</div>
+            <div class="tl-h-desc">Consolidação e ampliação de relatórios analíticos.</div>
+          </div>
+        </div>
+        <div class="tl-h-item">
+          <div class="tl-h-line-l"></div>
+          <div class="tl-h-line-r"></div>
+          <div class="tl-h-dot-wrap"><div class="tl-h-dot"></div></div>
+          <div class="tl-h-year">2021</div>
+          <div class="tl-h-text">
+            <div class="tl-h-title">Tecnologia Proprietária</div>
+            <div class="tl-h-desc">Plataformas modernas para crescimento acelerado.</div>
+          </div>
+        </div>
+        <div class="tl-h-item">
+          <div class="tl-h-line-l"></div>
+          <div class="tl-h-line-r"></div>
+          <div class="tl-h-dot-wrap"><div class="tl-h-dot"></div></div>
+          <div class="tl-h-year">2023</div>
+          <div class="tl-h-text">
+            <div class="tl-h-title">Diversificação do Modelo</div>
+            <div class="tl-h-desc">Novas vertentes B2B e B2C integradas.</div>
+          </div>
+        </div>
+        <div class="tl-h-item">
+          <div class="tl-h-line-l"></div>
+          <div class="tl-h-line-r"></div>
+          <div class="tl-h-dot-wrap"><div class="tl-h-dot"></div></div>
+          <div class="tl-h-year">2025</div>
+          <div class="tl-h-text">
+            <div class="tl-h-title">Virada Estratégica</div>
+            <div class="tl-h-desc">+41% YoY. White Label B2B2C lançado.</div>
+          </div>
+        </div>
+        <div class="tl-h-item is-now">
+          <div class="tl-h-line-l"></div>
+          <div class="tl-h-line-r" style="background:transparent"></div>
+          <div class="tl-h-dot-wrap"><div class="tl-h-dot"></div></div>
+          <div class="tl-h-year">2026</div>
+          <div class="tl-h-text">
+            <div class="tl-h-title" style="color:var(--laranja)">Nasce a Apent Holding</div>
+            <div class="tl-h-desc">Tecnologia, assessoria e gestão. O ecossistema completo.</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="nordic-stripe"></div>
+
 
 <!-- ECOSSISTEMA -->
 <section id="ecossistema">
@@ -816,6 +927,19 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
     <span class="sec-eyebrow">A APENT</span>
     <h2 class="sec-title" style="color:#fff">Um ecossistema construído para crescer.</h2>
     <p class="sec-body">Cada frente conectada. Cada especialista no lugar certo. Da tecnologia à alocação — tudo integrado.</p>
+  </div>
+
+  <!-- NOVO GRID DE LOGOS -->
+  <div class="eco-logos-grid reveal">
+    <div class="eco-logo-card">
+      <img src="../Logos_PNG/Autem_Investimentos.png" alt="Autem Investimentos" onerror="this.src='https://placehold.co/150x60/transparent/fff?text=AUTEM'">
+    </div>
+    <div class="eco-logo-card">
+      <img src="../Logos_PNG/Clube_FII.png" alt="Clube FII" onerror="this.src='https://placehold.co/150x60/transparent/fff?text=CLUBE+FII'">
+    </div>
+    <div class="eco-logo-card">
+      <img src="https://placehold.co/150x60/transparent/fff?text=MARCA+3" alt="Placeholder">
+    </div>
   </div>
 
   <div class="eco-blocks">
@@ -939,7 +1063,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
   </div>
 </section>
 
-<div class="nordic-stripe"></div>
+
 
 <!-- NÚMEROS -->
 <section id="numeros" style="position:relative; overflow:hidden;">
@@ -949,15 +1073,15 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
     <circle cx="100" cy="110" r="40" fill="#0044A2"/>
   </svg>
   <div class="num-inner">
-    <div class="num-item"><span class="num-val" data-target="3.2" data-prefix="+R$&nbsp;" data-suffix="B">+R$&nbsp;3,2B</span><span class="num-label">Sob custódia · Autem</span></div>
+    <div class="num-item"><span class="num-val" data-target="3.3" data-prefix="R$&nbsp;" data-suffix=" BI">R$&nbsp;3,3 BI</span><span class="num-label">Sob gestão · Autem</span></div>
     <div class="num-divider"></div>
-    <div class="num-item"><span class="num-val" data-target="46" data-suffix=" mil+">46 mil+</span><span class="num-label">Clientes ativos</span></div>
+    <div class="num-item"><span class="num-val" data-target="50" data-prefix="~" data-suffix=" mil">~50 mil</span><span class="num-label">Clientes · Autem</span></div>
     <div class="num-divider"></div>
-    <div class="num-item"><span class="num-val" data-target="8" data-prefix="+R$&nbsp;" data-suffix="B">+R$&nbsp;8B</span><span class="num-label">AUC virtual · Clube FII</span></div>
+    <div class="num-item"><span class="num-val" data-target="10" data-prefix="+" data-suffix=" BI">+10 BI</span><span class="num-label">Volume de carteiras cadastradas · Autem</span></div>
     <div class="num-divider"></div>
-    <div class="num-item"><span class="num-val" data-target="41" data-suffix="%">41%</span><span class="num-label">Crescimento YoY 2025</span></div>
+    <div class="num-item"><span class="num-val" data-target="2.5" data-prefix="+" data-suffix=" BI">+2,5 BI</span><span class="num-label">Carteiras integradas B3 (AUM Virtual) · Clube FII / White Label</span></div>
     <div class="num-divider"></div>
-    <div class="num-item"><span class="num-val" data-target="10" data-prefix="R$&nbsp;" data-suffix="B">R$&nbsp;10B</span><span class="num-label">Meta de patrimônio</span></div>
+    <div class="num-item"><span class="num-val" data-target="370" data-prefix="+" data-suffix=" mil">+370 mil</span><span class="num-label">Usuários cadastrados · Clube FII</span></div>
   </div>
 </section>
 
@@ -993,16 +1117,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
         <p class="socio-bio">Felipe lidera a Apent com visão estratégica de longo prazo, buscando constantemente inovação em todos os setores do ecossistema.</p>
       </div>
     </div>
-    <!-- 2. Rodrigo Cardoso -->
-    <div class="socio-card" onclick="openSocioModal(this)">
-      <img src="../team-photos/RodrigoCardoso.jpeg" alt="Rodrigo Cardoso" class="socio-img">
-      <div class="socio-info">
-        <h4 class="socio-name">Rodrigo Cardoso</h4>
-        <span class="socio-cargo">Sócio</span>
-        <p class="socio-bio">Experiência consolidada em mercado financeiro e gestão de portfólios, com foco em crescimento sustentável dentro do ecossistema Apent.</p>
-      </div>
-    </div>
-    <!-- 3. Celson -->
+    <!-- 2. Celson -->
     <div class="socio-card" onclick="openSocioModal(this)">
       <img src="../team-photos/Celson.jpeg" alt="Celson" class="socio-img">
       <div class="socio-info">
@@ -1011,7 +1126,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
         <p class="socio-bio">Referência em estruturação de negócios e desenvolvimento de parcerias estratégicas que impulsionam o crescimento da Apent.</p>
       </div>
     </div>
-    <!-- 4. Vinicius Almeida -->
+    <!-- 3. Vinicius Almeida -->
     <div class="socio-card" onclick="openSocioModal(this)">
       <img src="../team-photos/ViniciusAlmeida.jpeg" alt="Vinícius Almeida" class="socio-img">
       <div class="socio-info">
@@ -1020,34 +1135,16 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
         <p class="socio-bio">Liderança focada em expansão e eficiência, agregando visão de negócios para o crescimento do ecossistema.</p>
       </div>
     </div>
-    <!-- 5. Danilo Barbosa -->
+    <!-- 4. Rodrigo Cardoso -->
     <div class="socio-card" onclick="openSocioModal(this)">
-      <img src="../team-photos/DaniloBarbosa.jpeg" alt="Danilo Barbosa" class="socio-img">
+      <img src="../team-photos/RodrigoCardoso.jpeg" alt="Rodrigo Cardoso" class="socio-img">
       <div class="socio-info">
-        <h4 class="socio-name">Danilo Barbosa</h4>
+        <h4 class="socio-name">Rodrigo Cardoso</h4>
         <span class="socio-cargo">Sócio</span>
-        <p class="socio-bio">Experiência sólida na estruturação de novos negócios e otimização de operações dentro da Apent Tech.</p>
+        <p class="socio-bio">Experiência consolidada em mercado financeiro e gestão de portfólios, com foco em crescimento sustentável dentro do ecossistema Apent.</p>
       </div>
     </div>
-    <!-- 6. Felipe Ribeiro -->
-    <div class="socio-card" onclick="openSocioModal(this)">
-      <img src="../team-photos/FelipeRibeiro.jpeg" alt="Felipe Ribeiro" class="socio-img">
-      <div class="socio-info">
-        <h4 class="socio-name">Felipe Ribeiro</h4>
-        <span class="socio-cargo">Sócio</span>
-        <p class="socio-bio">Atuação estratégica na expansão das verticais de negócio da Apent, com foco em distribuição e captação.</p>
-      </div>
-    </div>
-    <!-- 7. Thiago Otuki -->
-    <div class="socio-card" onclick="openSocioModal(this)">
-      <img src="../team-photos/ThiagoOtuki.jpeg" alt="Thiago Otuki" class="socio-img">
-      <div class="socio-info">
-        <h4 class="socio-name">Thiago Otuki</h4>
-        <span class="socio-cargo">Sócio</span>
-        <p class="socio-bio">Visão analítica e foco em resultados, contribuindo para a eficiência operacional e crescimento do portfólio da Apent.</p>
-      </div>
-    </div>
-    <!-- 8. Maycon Brito -->
+    <!-- 5. Maycon Brito -->
     <div class="socio-card" onclick="openSocioModal(this)">
       <img src="../team-photos/MayconBrito.jpeg" alt="Maycon Brito" class="socio-img">
       <div class="socio-info">
@@ -1056,7 +1153,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
         <p class="socio-bio">Expertise em estruturação de negócios e desenvolvimento de soluções inovadoras que ampliam o alcance e o impacto do ecossistema Apent.</p>
       </div>
     </div>
-    <!-- 9. Morais Jr. -->
+    <!-- 6. Morais Jr. -->
     <div class="socio-card" onclick="openSocioModal(this)">
       <img src="../team-photos/MoraisJr.jpeg" alt="Morais Jr." class="socio-img">
       <div class="socio-info">
@@ -1065,16 +1162,43 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
         <p class="socio-bio">Visão estratégica e experiência operacional que contribuem para a solidez e o crescimento das verticais da Apent Holding.</p>
       </div>
     </div>
+    <!-- 7. Danilo Barbosa -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/DaniloBarbosa.jpeg" alt="Danilo Barbosa" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Danilo Barbosa</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Experiência sólida na estruturação de novos negócios e otimização de operações dentro da Apent Tech.</p>
+      </div>
+    </div>
+    <!-- 8. Felipe Ribeiro -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/FelipeRibeiro.jpeg" alt="Felipe Ribeiro" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Felipe Ribeiro</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Atuação estratégica na expansão das verticais de negócio da Apent, com foco em distribuição e captação.</p>
+      </div>
+    </div>
+    <!-- 9. Thiago Otuki -->
+    <div class="socio-card" onclick="openSocioModal(this)">
+      <img src="../team-photos/ThiagoOtuki.jpeg" alt="Thiago Otuki" class="socio-img">
+      <div class="socio-info">
+        <h4 class="socio-name">Thiago Otuki</h4>
+        <span class="socio-cargo">Sócio</span>
+        <p class="socio-bio">Visão analítica e foco em resultados, contribuindo para a eficiência operacional e crescimento do portfólio da Apent.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- CTA + FOOTER -->
-<section id="cta-footer">
-  <div class="cta-accent"></div>
-  <div class="cta-deco"></div>
-  <div class="cta-deco-half"></div>
+<section id="cta-footer" style="background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; background:rgba(24,32,40,0.88); z-index:1;"></div>
+  <div class="cta-deco" style="z-index:2"></div>
+  <div class="cta-deco-half" style="z-index:2"></div>
   <!-- SVG Sol CTA -->
-  <svg class="svg-cta-sol" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <svg class="svg-cta-sol" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="z-index:2">
     <defs>
       <mask id="cta-sol-mask">
         <circle cx="200" cy="200" r="180" fill="white"/>
@@ -1089,17 +1213,12 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
     </defs>
     <rect width="400" height="400" fill="#FBC200" mask="url(#cta-sol-mask)"/>
   </svg>
-  <div class="cta-main">
-    <div class="cta-left reveal">
-      <span class="sec-eyebrow">FALE CONOSCO</span>
-      <h2 class="cta-title">Invista para<br><em>viver melhor.</em><br>Saiba como.</h2>
-      <p class="cta-sub">Conectamos você à inteligência certa para cada etapa da sua jornada. Dados, plataforma e assessoria — tudo em um ecossistema.</p>
-      <a href="mailto:contato@apent.com.br" class="btn-primary">Fale conosco</a>
-    </div>
-    <div class="cta-right reveal" style="transition-delay:.2s">
-      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--nyhavn)"></div><div class="cta-proof-text">Acesse dados reais de <strong>+75 mil carteiras</strong> de FIIs integradas à B3 via Clube FII.</div></div>
-      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--laranja)"></div><div class="cta-proof-text">Invista com assessores que já cuidam de <strong>R$&nbsp;3,2 bilhões</strong> para 46 mil clientes na Autem.</div></div>
-      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--amarelo)"></div><div class="cta-proof-text">Faça parte de um grupo com a meta de chegar a <strong>R$&nbsp;10 bilhões</strong> sob gestão.</div></div>
+  <div class="cta-main" style="grid-template-columns:1fr; text-align:center; padding:120px 56px 80px; max-width:800px; display:flex; flex-direction:column; align-items:center;">
+    <div class="cta-left reveal" style="position:relative; z-index:3; display:flex; flex-direction:column; align-items:center;">
+      <span class="sec-eyebrow" style="margin-bottom:24px;">PRONTO PARA O PRÓXIMO PASSO?</span>
+      <h2 class="cta-title">Transforme a gestão do seu <em>patrimônio</em> com a Apent.</h2>
+      <p class="cta-sub" style="margin: 0 auto 44px auto; max-width: 500px;">Conectamos você à inteligência certa para cada etapa da sua jornada. Dados, plataforma e assessoria — tudo em um ecossistema.</p>
+      <a href="mailto:contato@apent.com.br" class="btn-primary" style="font-size: 16px; padding: 20px 48px;">Fale conosco</a>
     </div>
   </div>
   <div class="footer-bar">
@@ -1139,9 +1258,18 @@ window.addEventListener('scroll',()=>{
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
 },{threshold:.12});
-document.querySelectorAll('.reveal,.reveal-svg,.num-item,.socio-card:not(.placeholder)').forEach((el,i)=>{
+document.querySelectorAll('.reveal,.reveal-svg,.num-item').forEach((el,i)=>{
   if(!el.style.transitionDelay) el.style.transitionDelay=(i*.06)+'s';
   io.observe(el);
+});
+
+/* SÓCIOS IO — delay separado para não acumular com o reveal global */
+const socioIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');socioIO.unobserve(e.target)}});
+},{threshold:.05, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.socio-card:not(.placeholder)').forEach((el,i)=>{
+  el.style.transitionDelay=(i%3)*0.1+'s';
+  socioIO.observe(el);
 });
 
 /* TIMELINE */
@@ -1149,6 +1277,8 @@ const tlIO=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
 },{threshold:.3});
 document.querySelectorAll('.tl-item').forEach((el,i)=>{el.style.transitionDelay=(i*.15)+'s';tlIO.observe(el)});
+
+/* TIMELINE HORIZONTAL — sem JS necessário */
 
 /* SÓCIOS MODAL */
 function openSocioModal(card) {
