@@ -448,7 +448,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 .num-label{font-size:13px;font-weight:400;color:#ffffff;letter-spacing:.04em;white-space:nowrap}
 
 /* ── SÓCIOS ── */
-#socios { background: #000000; padding: 120px 56px; }
+#socios { background: #1a1a1a; padding: 120px 56px; }
 .socios-header { text-align: center; margin-bottom: 80px; }
 .socios-header .sec-eyebrow { color: #FFB188; }
 .socios-header .sec-title { color: #fff; }
@@ -467,7 +467,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 .socio-card {
   position: relative;
   aspect-ratio: 4/5;
-  background: #000000;
+  background: #1a1a1a;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -481,10 +481,10 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
   position: absolute;
   inset: 0;
   background:
-    /* Fade horizontal nas laterais (mais intenso) */
-    linear-gradient(to right,  #000000 0%, transparent 20%, transparent 80%, #000000 100%),
+    /* Fade horizontal nas laterais */
+    linear-gradient(to right,  #1a1a1a 0%, transparent 20%, transparent 80%, #1a1a1a 100%),
     /* Fade vertical topo e base */
-    linear-gradient(to bottom, #000000 0%, transparent 15%, transparent 70%, #000000 100%);
+    linear-gradient(to bottom, #1a1a1a 0%, transparent 15%, transparent 70%, #1a1a1a 100%);
   z-index: 2;
   pointer-events: none;
   transition: opacity 0.5s ease;
@@ -537,7 +537,7 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background: linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.65) 45%, transparent 100%);
+  background: linear-gradient(to top, rgba(26,26,26,0.98) 0%, rgba(26,26,26,0.70) 45%, transparent 100%);
   opacity: 0;
   transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   z-index: 3; /* Acima da vinheta */
@@ -767,12 +767,12 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
 .num-val { font-size: clamp(36px, 4.5vw, 52px) !important; margin-bottom: 8px !important; }
 .num-label { font-size: 14px !important; color: rgba(255,255,255,0.7) !important; white-space: normal !important; max-width: 180px; margin: 0 auto; display: block; }
 
-/* OVERRIDE SÓCIOS PB E TRONCO */
+/* OVERRIDE SÓCIOS — sempre PB, só zoom no hover */
 .socio-card {
   aspect-ratio: 3/4 !important;
   position: relative !important;
   overflow: hidden !important;
-  background: #000000 !important;
+  background: #1a1a1a !important;
 }
 /* Imagem 75% do card (redução de 25%), centralizada, tronco visível */
 .socio-card img, .socio-card .socio-img {
@@ -790,10 +790,10 @@ nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
   object-position: center bottom !important;
   transform: none !important;
   filter: grayscale(100%) !important;
-  transition: filter 0.5s ease, transform 0.5s ease !important;
+  transition: transform 0.5s ease !important;
 }
 .socio-card:hover img, .socio-card:hover .socio-img {
-  filter: grayscale(0%) !important;
+  filter: grayscale(100%) !important;
   transform: scale(1.03) !important;
 }
 </style>
